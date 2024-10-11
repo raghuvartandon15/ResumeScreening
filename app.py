@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from PyPDF2 import PdfReader
 import re
 import pickle
+import os
 
 app = Flask(__name__)
 
@@ -260,4 +261,7 @@ def pred():
         return render_template("resume.html", message="No resume file uploaded.")
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    # Get the PORT from environment variables, defaulting to 5000 if not set
+    port = int(os.environ.get("PORT", 5001))
+    # Run the app with the specified host and port
+    app.run(host="0.0.0.0", port=port)
